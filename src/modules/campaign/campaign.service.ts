@@ -26,4 +26,8 @@ export class CampaignService {
         campaign.website = payload.website
         return this.campaignRepository.save(campaign)
     }
+
+    delete(campaign: Campaign) {
+        this.campaignRepository.remove(campaign)
+    }
 }
