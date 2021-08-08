@@ -17,4 +17,7 @@ export class Campaign extends BaseEntity {
 
     @Column()
     exposureDate: Date
+
+    @Column()
+    website: string
 }
