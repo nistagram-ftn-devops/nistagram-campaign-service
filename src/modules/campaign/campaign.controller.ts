@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Campaign } from './campaign.entity';
 import { CampaignService } from './campaign.service';
 
@@ -15,5 +15,10 @@ export class CampaignController {
     @Get(':id')
     findById(@Param('id') id: number): Promise<Campaign> {
         return this.campaignService.findById(id)
+    }
+
+    @Post()
+    create(@Body() args: Partial<Campaign>): Promise<Campaign> {
+        return this.campaignService.create(args)
     }
 }

@@ -17,4 +17,13 @@ export class CampaignService {
         if (!campaign) throw new NotFoundException('campaign-not-found')
         return campaign
     }
+
+    async create(payload: Partial<Campaign>): Promise<Campaign> {
+        const campaign = new Campaign()
+        campaign.authorId = payload.authorId
+        campaign.imageId = payload.imageId
+        campaign.exposureDate = payload.exposureDate
+        campaign.website = payload.website
+        return this.campaignRepository.save(campaign)
+    }
 }
