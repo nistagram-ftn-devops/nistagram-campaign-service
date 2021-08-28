@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Campaign } from './campaign.entity';
 import { CampaignService } from './campaign.service';
 
@@ -26,5 +26,10 @@ export class CampaignController {
     async delete(@Param('id') id: number) {
         const campaign = await this.campaignService.findById(id)
         this.campaignService.delete(campaign)
+    }
+
+    @Patch('home')
+    getHomePostsForUser(@Body() payload: { userIds: string[] }): Promise<Campaign[]> {
+        return this.campaignService.getPostsForUser(payload.userIds)
     }
 }
