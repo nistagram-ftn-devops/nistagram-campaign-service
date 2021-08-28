@@ -30,4 +30,14 @@ export class CampaignService {
     delete(campaign: Campaign) {
         this.campaignRepository.remove(campaign)
     }
+
+    async getPostsForUser(userIds: string[]): Promise<Campaign[]> {
+        const result = await this.campaignRepository
+            .createQueryBuilder('campaign')
+            .where('authorId IN (:...userIds)', { userIds })
+            .andWhere('DATE(exposureDate) = DATE(:now)', { now: new Date().toISOString() })
+            .getMany()
+
+        return result
+    }
 }
